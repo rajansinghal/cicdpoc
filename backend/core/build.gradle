@@ -1,0 +1,15 @@
+repositories {
+    mavenCentral()
+}
+
+jar {
+    baseName = 'cicdpoc-app'
+    version = '0.1.0'
+}
+
+
+dependencies {
+    compile project(':backend:model')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+}

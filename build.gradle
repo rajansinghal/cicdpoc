@@ -1,0 +1,76 @@
+buildscript {
+    ext.springRepo = 'http://repo.spring.io/libs-release'
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        mavenLocal()
+        maven { url springRepo }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
+    }
+}
+
+group = 'com.technology'
+
+def vJavaLang = '1.8'
+def javaProjects = [project(':backend:core'), project(':backend:model')]
+def bootProjects = [project(':backend:core')]
+
+
+wrapper.gradleVersion = 4.3
+
+configure(allprojects) {
+    apply plugin: 'idea'
+    version = "0.1.0.SNAPSHOT"
+}
+
+configure(javaProjects) {
+    repositories {
+        mavenLocal()
+        maven { url springRepo }
+    }
+
+    apply plugin: 'java'
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: 'maven'
+
+
+    targetCompatibility = vJavaLang
+    sourceCompatibility = vJavaLang
+
+
+    afterEvaluate {
+        dependencyManagement {
+            imports {
+                mavenBom('io.spring.platform:platform-bom:Brussels-SR5')
+            }
+        }
+    }
+
+    dependencies {
+        compile 'org.slf4j:slf4j-api'
+        compile 'org.slf4j:log4j-over-slf4j'
+
+        testCompile 'junit:junit'
+        testCompile 'org.mockito:mockito-core'
+        testCompile 'org.assertj:assertj-core'
+    }
+
+}
+
+configure(bootProjects) {
+    apply plugin: 'org.springframework.boot'
+
+    springBoot.backupSource = false
+    group = 'com.technology'
+
+    jar {
+        baseName = 'cicdpoc-app'
+        version = '0.1.0'
+    }
+
+}
+
+
