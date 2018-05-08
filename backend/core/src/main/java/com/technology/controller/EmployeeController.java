@@ -18,7 +18,7 @@ public class EmployeeController {
     EmployeeService employeeService;
 
 
-    @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "id/{id}", method = RequestMethod.GET)
     public String getCustomerName(@PathVariable String id) {
         return employeeService.getCustomerName(id);
     }

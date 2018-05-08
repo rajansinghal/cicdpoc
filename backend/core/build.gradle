@@ -2,11 +2,19 @@ repositories {
     mavenCentral()
 }
 
+apply plugin: 'com.palantir.docker'
+
 jar {
     baseName = 'cicdpoc-app'
     version = '0.1.0'
 }
 
+docker {
+    name "${project.group}/${jar.baseName}"
+    dockerfile file('src/main/resources/docker/Dockerfile')
+    files jar.archivePath, "src/main/resources/docker/wait-for-it.sh"
+    buildArgs(['JAR_FILE': "${jar.archiveName}"])
+}
 
 dependencies {
     compile project(':backend:model')
