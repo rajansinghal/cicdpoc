@@ -4,8 +4,7 @@ pipeline {
         disableConcurrentBuilds()
     }
     environment {
-        AWS_ACCESS_KEY_ID = credentials('jenkins-aws-secret-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+       
         EFS_RESOURCE_TEST_PATH = "${env.WORKSPACE}" + "/efs-resource"
         E2E_DOCKER_MACHINE_NAME = 'e2e'
         MYSQL_DATA_DIR = '/home/ubuntu/data'
@@ -18,7 +17,7 @@ pipeline {
             }
 
         }
-       
+
 
     }
 
