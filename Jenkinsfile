@@ -4,7 +4,7 @@ pipeline {
         disableConcurrentBuilds()
     }
     environment {
-       
+
         EFS_RESOURCE_TEST_PATH = "${env.WORKSPACE}" + "/efs-resource"
         E2E_DOCKER_MACHINE_NAME = 'e2e'
         MYSQL_DATA_DIR = '/home/ubuntu/data'
@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               sh './gradlew --profile clean build'
+               sh 'sudo ./gradlew --profile clean build'
             }
 
         }
