@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               sh 'sudo ./gradlew --profile clean build'
+               sh './gradlew --profile clean build'
             }
 
         }
