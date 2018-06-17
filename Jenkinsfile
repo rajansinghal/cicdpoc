@@ -18,7 +18,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               sh './gradlew --profile clean build'
+                echo "spring active profile: " + " $SPRING_PROFILES_ACTIVE"
+               sh './gradlew clean build docker'
             }
 
         }
