@@ -22,7 +22,7 @@ pipeline {
                sh './gradlew clean build docker'
                sh "docker-machine create --driver amazonec2 --amazonec2-open-port 8080  --amazonec2-instance-type t2.micro --amazonec2-region ap-south-1 $E2E_DOCKER_MACHINE_NAME"
                                sh "eval \$(docker-machine env $E2E_DOCKER_MACHINE_NAME) && ./gradlew docker"
-                               sh "export "export AWS_IP=\$(docker-machine ip $E2E_DOCKER_MACHINE_NAME) && " +
+                               sh "export AWS_IP=\$(docker-machine ip $E2E_DOCKER_MACHINE_NAME) && " +
                                        "export LOG_DIRECTORY=/home/ubuntu/logs && " +
                                        "eval \$(docker-machine env $E2E_DOCKER_MACHINE_NAME) && " +
                                        "docker-compose up -d"
