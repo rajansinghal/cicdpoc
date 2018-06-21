@@ -10,7 +10,7 @@ pipeline {
         MYSQL_DATABASE = 'cicdpoc'
         SPRING_JPA_HIBERNATE_DDL = 'none'
         EFS_RESOURCE_TEST_PATH = "${env.WORKSPACE}" + "/efs-resource"
-        E2E_DOCKER_MACHINE_NAME = 'e2e'
+        E2E_DOCKER_MACHINE_NAME = 'e2ee'
         SPRING_PROFILES_ACTIVE = 'docker'
         MYSQL_DATA_DIR = '/home/ubuntu/data'
         MYSQL_INIT_FILES_DIR = '/home/ubuntu/db-init-scripts'
