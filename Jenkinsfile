@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo "spring active profile: " + " $SPRING_PROFILES_ACTIVE"
                sh './gradlew clean build docker'
-               sh "docker-machine create --driver amazonec2 --amazonec2-open-port 8080  --amazonec2-instance-type t2.micro --amazonec2-region ap-south-1 $E2E_DOCKER_MACHINE_NAME"
+               sh "docker-machine create --driver amazonec2 --amazonec2-open-port 8080  --amazonec2-instance-type t2.micro --amazonec2-region us-east-2 $E2E_DOCKER_MACHINE_NAME"
                                sh "eval \$(docker-machine env $E2E_DOCKER_MACHINE_NAME) && ./gradlew docker"
                                sh "export AWS_IP=\$(docker-machine ip $E2E_DOCKER_MACHINE_NAME) && " +
                                        "export LOG_DIRECTORY=/home/ubuntu/logs && " +
@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Check E2E instance is up') {
             steps {
-                sh "wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=15 -t 60 \$(docker-machine ip $E2E_DOCKER_MACHINE_NAME):8080/index.html"
+                sh "wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=15 -t 60 \$(docker-machine ip $E2E_DOCKER_MACHINE_NAME):8080/api/v1/employee/id/1"
             }
         }
 
