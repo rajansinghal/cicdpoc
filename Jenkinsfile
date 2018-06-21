@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Check E2E instance is up') {
             steps {
-                sh "wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=15 -t 60 \$(docker-machine ip $E2E_DOCKER_MACHINE_NAME):8080/api/v1/employee/id/1"
+                sh "wget -O /dev/null --retry-connrefused --waitretry=10 --read-timeout=20 --timeout=15 -t 60 \$(docker-machine ip $E2E_DOCKER_MACHINE_NAME):8080/cicdpoc/api/v1/employee/id/1"
             }
         }
 
