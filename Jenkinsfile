@@ -27,6 +27,7 @@ pipeline {
                                        "export LOG_DIRECTORY=/home/ubuntu/logs && " +
                                        "eval \$(docker-machine env $E2E_DOCKER_MACHINE_NAME) && " +
                                        "docker-compose up -d"
+
             }
 
         }
