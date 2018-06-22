@@ -21,7 +21,7 @@ pipeline {
                sh "docker-machine rm $E2E_DOCKER_MACHINE_NAME -f"
                echo "spring active profile: " + " $SPRING_PROFILES_ACTIVE"
                sh './gradlew clean build docker'
-               sh "docker-machine create --driver amazonec2  --amazonec2-open-port 9090  --amazonec2-instance-type t2.micro --amazonec2-region us-east-2 $E2E_DOCKER_MACHINE_NAME"
+               sh "docker-machine create --driver amazonec2  --amazonec2-open-port 9090  --amazonec2-instance-type t2.small --amazonec2-region us-east-2 $E2E_DOCKER_MACHINE_NAME"
                                sh "eval \$(docker-machine env $E2E_DOCKER_MACHINE_NAME) && ./gradlew docker"
                                sh "export AWS_IP=\$(docker-machine ip $E2E_DOCKER_MACHINE_NAME) && " +
                                        "export LOG_DIRECTORY=/home/ubuntu/logs && " +
