@@ -4,15 +4,13 @@ services:
   web:
     image: com.technology/cicdpoc-app
     volumes:
-      - ${EFS_RESOURCE_PATH}:/app/app-resources
-      - ${LOG_DIRECTORY}:/app/logs
+     - ./logs:/app/logs
     ports:
-      - "${APPLICATION_PORT}:8080"
+      - "9090:8080"
     entrypoint: ["./wait-for-it.sh","db:3306","--timeout=0","--strict", "--", "java","-Xms1024m","-Xmx2048m", "-Djava.security.egd=file:/dev/./urandom", "-jar","app.jar" ]
     environment:
-        SPRING_JPA_HIBERNATE_DDL-AUTO: ${SPRING_JPA_HIBERNATE_DDL}
-        SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
-        EFS_RESOURCE_PATH: ${EFS_RESOURCE_PATH}
+        SPRING_JPA_HIBERNATE_DDL-AUTO: none
+        SPRING_PROFILES_ACTIVE: docker
         LOG_DIRECTORY: /app/logs
         AWS_IP: ${AWS_IP}
     depends_on:
@@ -26,7 +24,7 @@ services:
       volumes:
         - ./data:/var/lib/mysql
       environment:
-          MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-          MYSQL_ALLOW_EMPTY_PASSWORD: ${MYSQL_ALLOW_EMPTY_PASSWORD}
-          MYSQL_DATABASE: ${MYSQL_DATABASE}
+          MYSQL_ROOT_PASSWORD:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+          MYSQL_DATABASE: efsdev
 
