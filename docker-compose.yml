@@ -7,7 +7,7 @@ services:
       - ${EFS_RESOURCE_PATH}:/app/app-resources
       - ${LOG_DIRECTORY}:/app/logs
     ports:
-      - "9090:8080"
+      - "${APPLICATION_PORT}:8080"
     entrypoint: ["./wait-for-it.sh","db:3306","--timeout=0","--strict", "--", "java","-Xms1024m","-Xmx2048m", "-Djava.security.egd=file:/dev/./urandom", "-jar","app.jar" ]
     environment:
         SPRING_JPA_HIBERNATE_DDL-AUTO: ${SPRING_JPA_HIBERNATE_DDL}
